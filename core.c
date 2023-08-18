@@ -12,9 +12,8 @@ void showScreen(char matrix[11][11]);
 void buildMap(char matrix[11][11]);
 void introduction();
 void bootIntroduction();
-char takeInput();
+char takeInput(char question[10], int nothing);
 void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[11][11]);
-int availableSpace(struct mobSettings *player, char matrix[11][11]);
 
 // Global Struct
 struct mobSettings {
@@ -36,13 +35,12 @@ int main() {
     bootIntroduction();
 
     while (1) {
-        sleep(1);
         char matrix[11][11];
         buildMap(matrix);
         matrix[player.playerY][player.playerX] = player.playerSkin;
         showScreen(matrix);
 
-        char direction = takeInput();
+        char direction = takeInput("What next?", 1);
 
         // Check for user input and perform actions
         if (direction == 'w' || direction == 'a' || direction == 's' || direction == 'd') {
@@ -56,11 +54,9 @@ int main() {
 }
 
 void bootIntroduction() {
-    printf("Está pronto? [S/N]\n");
-    sleep(1);
-    printf("\"Dica: <skip> para pular a introdução.\"\n");
-    sleep(1);
-
+    printf(" | Está pronto? [S/N]\n");
+    printf(" | \"Dica: <skip> para pular a introdução.\"\n");
+    printf(" └─> ");
     char charInput[100];
     scanf("%s", charInput);
     if (strcmp(charInput, "skip") != 0) {
@@ -69,8 +65,11 @@ void bootIntroduction() {
 }
 
 void buildMap(char matrix[11][11]) {
+    
     clearScreen();
+
     char initialMatrix[11][11] = {
+
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
         {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
         {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
@@ -83,7 +82,6 @@ void buildMap(char matrix[11][11]) {
         {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'}
         };
-
     // Copy initial map layout to the game matrix
     for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 11; j++) {
@@ -134,7 +132,12 @@ void clearScreen() {
     system("@cls||clear");
 }
 
-char takeInput() {
+char takeInput(char question[10], int nothing) {
+    puts("");
+    if (nothing) {
+        printf(" │ %s\n", question);
+    }
+    printf(" └─> ");
     char charInput[100];
     scanf("%s", charInput);
     return charInput[0];
