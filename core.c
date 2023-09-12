@@ -1,3 +1,10 @@
+//TODO LIST:
+// - make a nice githup page for this little itty thing
+// - add inventory
+// - add ability to portal through spaces
+
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -7,6 +14,7 @@
 struct mobSettings;
 
 // Function declarations
+int  isPassable(char character);
 void clearScreen();
 void showScreen(char matrix[11][11]);
 void buildMap(char matrix[11][11]);
@@ -14,6 +22,7 @@ void introduction();
 void bootIntroduction();
 char takeInput(char question[10], int nothing);
 void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[11][11]);
+void takeCommand(struct mobSettings *player);
 
 // Global Struct
 struct mobSettings {
@@ -34,23 +43,26 @@ int main() {
     // Display boot introduction and wait for input
     bootIntroduction();
 
+    takeCommand(&player);
+
+    return 0;
+}
+
+void takeCommand(struct mobSettings *player){
     while (1) {
         char matrix[11][11];
         buildMap(matrix);
-        matrix[player.playerY][player.playerX] = player.playerSkin;
+        matrix[player->playerY][player->playerX] = player->playerSkin;
         showScreen(matrix);
 
-        char direction = takeInput("What next?", 1);
+        char input = takeInput("What next?", 1);
 
         // Check for user input and perform actions
-        if (direction == 'w' || direction == 'a' || direction == 's' || direction == 'd') {
-            handlePlayerMovement(&player, direction, matrix);
-        } else {
-            // Handle other input cases
-        }
-    }
+        if (input == 'w' || input == 'a' || input == 's' || input == 'd') {
+            handlePlayerMovement(player, input, matrix);
 
-    return 0;
+    }
+}
 }
 
 void bootIntroduction() {
@@ -70,18 +82,20 @@ void buildMap(char matrix[11][11]) {
 
     char initialMatrix[11][11] = {
 
-        {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', 'W', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', 'W', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', 'I', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W'},
-        {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'}
-        };
+    "WWWWWWWWWWW",
+    "W~~~~~~~~~W",
+    "W~~~~~~~~~W",
+    "W~~~~~~~~~W",
+    "W~~W~~~~~~W",
+    "W~~~~~~~~~W",
+    "W~~~~~~I~~W",
+    "W~~~~~~~~~W",
+    "W~~~~~~~~~W",
+    "W~~~~~~~~~W",
+    "WWWWWWWWWWW"
+    
+    };
+        
     // Copy initial map layout to the game matrix
     for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 11; j++) {
@@ -143,31 +157,41 @@ char takeInput(char question[10], int nothing) {
     return charInput[0];
 }
 
+// Function to check if a character is passable
+int isPassable(char character) {
+    // Add conditions for different characters here
+    // For now, only 'W' (wall) is considered impassable
+    return character != 'W';
+}
+
 void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[11][11]) {
-    // Move the player based on the given direction
+    // Define the player's new position
+    int newPlayerX = player->playerX;
+    int newPlayerY = player->playerY;
+
+    // Calculate the new position based on the direction
     switch (direction) {
         case 'w':
-            if (player->playerY > 0 && matrix[player->playerY - 1][player->playerX] != 'W') {
-                player->playerY--;
-            }
+            newPlayerY--;
             break;
         case 'a':
-            if (player->playerX > 0 && matrix[player->playerY][player->playerX - 1] != 'W') {
-                player->playerX--;
-            }
+            newPlayerX--;
             break;
         case 's':
-            if (player->playerY < 10 && matrix[player->playerY + 1][player->playerX] != 'W') {
-                player->playerY++;
-            }
+            newPlayerY++;
             break;
         case 'd':
-            if (player->playerX < 10 && matrix[player->playerY][player->playerX + 1] != 'W') {
-                player->playerX++;
-            }
+            newPlayerX++;
             break;
         default:
             // Handle invalid input
-            break;
+            return;
+    }
+
+    // Check if the new position is within bounds and is passable
+    if (newPlayerX >= 0 && newPlayerX < 11 && newPlayerY >= 0 && newPlayerY < 11 && isPassable(matrix[newPlayerY][newPlayerX])) {
+        // Update the player's position
+        player->playerX = newPlayerX;
+        player->playerY = newPlayerY;
     }
 }
