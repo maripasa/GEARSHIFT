@@ -1,10 +1,3 @@
-//TODO LIST:
-// - make a nice githup page for this little itty thing
-// - add inventory
-// - add ability to portal through spaces
-
-
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
