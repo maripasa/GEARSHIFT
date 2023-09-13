@@ -43,6 +43,28 @@ Versão 0.0.2 (Pré-Alpha - Data de Lançamento: TBD)
 - Deixei o README mais bonito e uma página em pt-br.
 - Adicionei suporte para WINDOWS!!
 
+## Como Começar
+
+Para se tornar um mestre em *Gearshift*, siga estas etapas simples:
+
+1. **Clonar o Repositório**: Esqueça as versões sofisticadas; apenas pegue o código mais recente diretamente deste repositório. Nenhuma instalação sofisticada é necessária.
+
+    ```shell
+    git clone https://github.com/maripasa/Gearshift
+    ```
+
+2. **Navegar até o Diretório *Gearshift***:
+
+    ```shell
+    cd Gearshift
+    ```
+
+3. **Executar o Jogo**:
+
+    ```shell
+    ./core.exe
+    ```
+
 ## Lista de Tarefas
 
 ### **Metas de Longo Prazo**
@@ -90,25 +112,3 @@ Versão 0.0.2 (Pré-Alpha - Data de Lançamento: TBD)
 - [x] ~~Implementar suporte para forno de micro-ondas.~~ (agora funciona no Windows)
 
 - [ ] Adicionar a capacidade de se teleportar através de espaços.
-
-## Como Começar
-
-Para se tornar um mestre em *Gearshift*, siga estas etapas simples:
-
-1. **Clonar o Repositório**: Esqueça as versões sofisticadas; apenas pegue o código mais recente diretamente deste repositório. Nenhuma instalação sofisticada é necessária.
-
-    ```shell
-    git clone https://github.com/maripasa/Gearshift
-    ```
-
-2. **Navegar até o Diretório *Gearshift***:
-
-    ```shell
-    cd Gearshift
-    ```
-
-3. **Executar o Jogo**:
-
-    ```shell
-    ./core.exe
-    ```

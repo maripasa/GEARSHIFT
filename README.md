@@ -43,6 +43,28 @@ Version 0.0.2 (Pre-Alpha - Release Date: TBD)
 - Made README prettier and a pt-br page.
 - Added support for WINDOWS!!
 
+## Getting Started
+
+To become a master with *Gearshift*, follow these simple steps:
+
+1. **Clone the Repository**: Forget about fancy releases; just grab the latest code straight from this repository. No need for fancy installations.
+
+    ```shell
+    git clone https://github.com/maripasa/Gearshift
+    ```
+
+2. **Navigate to the *Gearshift* Directory**:
+
+    ```shell
+    cd Gearshift
+    ```
+
+3. **Run the Game**:
+
+    ```shell
+    ./core.exe
+    ```
+
 ## Todo
 
 ### **Long Goals**
@@ -90,25 +112,3 @@ Version 0.0.2 (Pre-Alpha - Release Date: TBD)
 - [x] ~~Implement microwave oven support.~~ (it works on windows now)
 
 - [ ] Add ability to portal through spaces
-
-## Getting Started
-
-To become a master with *Gearshift*, follow these simple steps:
-
-1. **Clone the Repository**: Forget about fancy releases; just grab the latest code straight from this repository. No need for fancy installations.
-
-    ```shell
-    git clone https://github.com/maripasa/Gearshift
-    ```
-
-2. **Navigate to the *Gearshift* Directory**:
-
-    ```shell
-    cd Gearshift
-    ```
-
-3. **Run the Game**:
-
-    ```shell
-    ./core.exe
-    ```
