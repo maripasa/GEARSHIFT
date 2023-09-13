@@ -1,10 +1,12 @@
 # *Gearshift* - Text Dungeon Crawler
 
+![game screenshot2](https://github.com/maripasa/GEARSHIFT/assets/123270648/125b6ee1-e77b-4563-94a7-506d8086aef6)
+
 _Read this in other languages: [English](README.md), [Português🇧🇷](README.br.md)._
 
 ## Overview
 
-*Gearshift* is a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
+*Gearshift* is ~~(yet to be)~~ a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
 
 ## System Requirements
 
@@ -26,7 +28,7 @@ _Read this in other languages: [English](README.md), [Português🇧🇷](README
 - Movement and exploration mechanics that will have you questioning your life choices.
 
 *(Not those much yet.)*
-- Approximately one billion hours (give or take) of mind-bendingly engaging gameplay.
+- Approximately one billion hours ~~(give or take)~~ of mind-bendingly engaging gameplay.
 
 *(Not even two minutes right now, but you can always replay it a billion million times.)*
 
