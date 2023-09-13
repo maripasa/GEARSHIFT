@@ -1,10 +1,12 @@
 # *Gearshift* - Jogo de Exploração em Texto
 
+![game screenshot2](https://github.com/maripasa/GEARSHIFT/assets/123270648/b5c267f1-fa94-4775-bcfd-3ac7aec625ca)
+
 _Leia isso em outras linguas: [English](README.md), [Português🇧🇷](README.br.md)._
 
 ## Visão Geral
 
-*Gearshift* é um jogo de exploração de masmorras em texto incrivelmente simples (você não está em uma masmorra) escrito em C. Este projeto está atualmente na fase "pré-alfa", o que significa que estamos apenas começando esta emocionante aventura pelas ruínas de um mundo verde tomado pelo céu azul.
+*Gearshift* é ~~(o que vai ser)~~ um jogo de exploração de masmorras em texto incrivelmente simples (você não está em uma masmorra) escrito em C. Este projeto está atualmente na fase "pré-alfa", o que significa que estamos apenas começando esta emocionante aventura pelas ruínas de um mundo verde tomado pelo céu azul.
 
 ## Requisitos do Sistema
 
@@ -26,7 +28,7 @@ _Leia isso em outras linguas: [English](README.md), [Português🇧🇷](README.
 - Mecânicas de movimento e exploração que farão você questionar suas escolhas de vida.
 
 *(Não muitas ainda.)*
-- Aproximadamente um bilhão de horas (mais ou menos) de jogabilidade envolvente de tirar o fôlego.
+- Aproximadamente um bilhão de horas ~~(mais ou menos)~~ de jogabilidade envolvente de tirar o fôlego.
 
 *(Não chega nem a dois minutos agora, mas você sempre pode jogar um bilhão de vezes.)*
 
