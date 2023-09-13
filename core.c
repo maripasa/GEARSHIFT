@@ -1,36 +1,59 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
+#define CENTER_Y 5
+#define CENTER_X 5
+#define MATRIX_HEIGHT 12
+#define MATRIX_WIDTH 12
+#define INPUT_SIZE 10
 
 // Forward declaration of the struct mobSettings
 struct mobSettings;
 
-// Function declarations
-int  isPassable(char character);
-void clearScreen();
-void showScreen(char matrix[11][11]);
-void buildMap(char matrix[11][11]);
-void introduction();
+// Introduction Functions
 void bootIntroduction();
-char takeInput(char question[10], int nothing);
-void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[11][11]);
+void introduction();
+
+// Input Functions
+char takeInput(const char *question, char *command, char *argument, int bufferSize);
 void takeCommand(struct mobSettings *player);
+void handleCommand(struct mobSettings *player, char matrix[MATRIX_HEIGHT][MATRIX_WIDTH], char command);
+
+// Map Functions
+void buildMap(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]);
+int  isPassable(char character);
+void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]);
+
+// Console functions
+void showScreen(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]);
+void clearScreen();
+void crossSleep(int milliseconds);
 
 // Global Struct
 struct mobSettings {
     int playerY;
     int playerX;
     char playerSkin;
+    int playerRoom;
 };
 
 int main() {
+
+    // Configura o código de página do console para UTF-8
+    system("chcp 65001");
     clearScreen();
 
     // Initialize player settings
     struct mobSettings player;
-    player.playerX = 5;
-    player.playerY = 5;
+    player.playerX = CENTER_X;
+    player.playerY = CENTER_Y;
     player.playerSkin = 'O';
 
     // Display boot introduction and wait for input
@@ -41,113 +64,138 @@ int main() {
     return 0;
 }
 
-void takeCommand(struct mobSettings *player){
-    while (1) {
-        char matrix[11][11];
-        buildMap(matrix);
-        matrix[player->playerY][player->playerX] = player->playerSkin;
-        showScreen(matrix);
-
-        char input = takeInput("What next?", 1);
-
-        // Check for user input and perform actions
-        if (input == 'w' || input == 'a' || input == 's' || input == 'd') {
-            handlePlayerMovement(player, input, matrix);
-
-    }
-}
-}
-
 void bootIntroduction() {
     printf(" | Está pronto? [S/N]\n");
     printf(" | \"Dica: <skip> para pular a introdução.\"\n");
     printf(" └─> ");
-    char charInput[100];
+    char charInput[INPUT_SIZE];
     scanf("%s", charInput);
     if (strcmp(charInput, "skip") != 0) {
         introduction();
     }
 }
 
-void buildMap(char matrix[11][11]) {
-    
-    clearScreen();
-
-    char initialMatrix[11][11] = {
-
-    "WWWWWWWWWWW",
-    "W~~~~~~~~~W",
-    "W~~~~~~~~~W",
-    "W~~~~~~~~~W",
-    "W~~W~~~~~~W",
-    "W~~~~~~~~~W",
-    "W~~~~~~I~~W",
-    "W~~~~~~~~~W",
-    "W~~~~~~~~~W",
-    "W~~~~~~~~~W",
-    "WWWWWWWWWWW"
-    
-    };
-        
-    // Copy initial map layout to the game matrix
-    for (int i = 0; i < 11; i++) {
-        for (int j = 0; j < 11; j++) {
-            matrix[i][j] = initialMatrix[i][j];
-        }
-    }
-}
-
 void introduction() {
     clearScreen();
     printf("No ir do tempo, desperta um autômato de mistério e potencial.\n");
-    sleep(4);
+    crossSleep(4000);
     printf("O golem metálico emerge do sono, um guardião perdido nas areias do esquecimento.\n");
-    sleep(3);
+    crossSleep(3000);
     printf("Sob um céu límpido e sereno,\n");
-    sleep(3);
+    crossSleep(3000);
     printf("Um mundo de maravilhas e enigmas é contemplado,\n");
-    sleep(3);
+    crossSleep(3000);
     printf("Montes flutuam em harmonia,\n");
-    sleep(3);
+    crossSleep(3000);
     printf("Antigas ruínas são abraçadas pela vegetação exuberante.\n\n");
-    sleep(5);
+    crossSleep(5000);
     printf("    ██████╗ ███████╗ █████╗ ██████╗ ███████╗██╗  ██╗██╗███████╗████████╗\n");
-    sleep(1);
+    crossSleep(1000);
     printf("   ██╔════╝ ██╔════╝██╔══██╗██╔══██╗██╔════╝██║  ██║██║██╔════╝╚══██╔══╝\n");
-    sleep(1);
-    printf("   ██║  ███╗█████╗  ███████║██████╔╝███████╗███████║██║█████╗     ██║\n"); 
-    sleep(1);
-    printf("   ██║   ██║██╔══╝  ██╔══██║██╔══██╗╚════██║██╔══██║██║██╔══╝     ██║\n"); 
-    sleep(1);
-    printf("   ╚██████╔╝███████╗██║  ██║██║  ██║███████║██║  ██║██║██║        ██║\n"); 
-    sleep(1);
+    crossSleep(1000);
+    printf("   ██║  ███╗█████╗  ███████║██████╔╝███████╗███████║██║█████╗     ██║\n");
+    crossSleep(1000);
+    printf("   ██║   ██║██╔══╝  ██╔══██║██╔══██╗╚════██║██╔══██║██║██╔══╝     ██║\n");
+    crossSleep(1000);
+    printf("   ╚██████╔╝███████╗██║  ██║██║  ██║███████║██║  ██║██║██║        ██║\n");
+    crossSleep(1000);
     printf("    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝ \n\n");
-    sleep(3);
-    }
-
-void showScreen(char matrix[11][11]) {
-    // Display each cell of the game matrix
-    for (int i = 0; i < 11; i++) {
-        for (int j = 0; j < 11; j++) {
-            printf("%2c ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    crossSleep(3000);
 }
 
-void clearScreen() {
-    system("@cls||clear");
-}
 
-char takeInput(char question[10], int nothing) {
-    puts("");
-    if (nothing) {
-        printf(" │ %s\n", question);
-    }
+char takeInput(const char *question, char *command, char *argument, int bufferSize) {
+    printf(" │ %s\n", question);
     printf(" └─> ");
-    char charInput[100];
-    scanf("%s", charInput);
-    return charInput[0];
+    char userInput[INPUT_SIZE];
+    fgets(userInput, sizeof(userInput), stdin);
+
+    if (strlen(userInput) < 1) {
+        return '\0'; // Empty input
+    }
+
+    char input = userInput[0];
+
+    if (strlen(userInput) > 1) {
+        // Parse command and argument
+        sscanf(userInput, "%s %s", command, argument);
+    } else {
+        // Reset command and argument
+        command[0] = '\0';
+        argument[0] = '\0';
+    }
+
+    return input;
+}
+
+void takeCommand(struct mobSettings *player) {
+    while (1) {
+        char matrix[MATRIX_HEIGHT][MATRIX_WIDTH];
+        buildMap(matrix);
+        matrix[player->playerY][player->playerX] = player->playerSkin;
+        showScreen(matrix);
+
+        char userCommand[INPUT_SIZE]; // Buffer to store the user's command
+        char userArgument[INPUT_SIZE]; // Buffer to store the user's argument
+
+        char input;
+        do {
+            input = takeInput("What next? (w/a/s/d/q): ", userCommand, userArgument, INPUT_SIZE);
+            if (input == 'q') {
+                // Handle the exit command
+                exit(0); // Gracefully exit the program
+            }
+        } while (input != 'w' && input != 'a' && input != 's' && input != 'd');
+
+        // Check for user input and perform actions
+        handleCommand(player, matrix, input);
+    }
+}
+
+void handleCommand(struct mobSettings *player, char matrix[MATRIX_HEIGHT][MATRIX_WIDTH], char command) {
+    // Handle different commands here
+    switch (command) {
+        case 'w':
+        case 'a':
+        case 's':
+        case 'd':
+            handlePlayerMovement(player, command, matrix);
+            break;
+        case 'q':
+            exit(0); // Exit the program gracefully
+            break;
+        // Add more command cases here
+        default:
+            // Handle unsupported commands
+            break;
+    }
+}
+
+void buildMap(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]) {
+    
+    clearScreen();
+	
+    char initialMatrix[MATRIX_HEIGHT][MATRIX_WIDTH] = {
+    {'W', 'W', 'W', 'W', 'O', 'W', 'W', 'W', 'W', 'W', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'O', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', '~', '~', '~', '~', '~', '~', '~', '~', '~', 'W', ' '},
+    {'W', 'W', 'W', 'W', 'O', 'W', 'W', 'W', 'W', 'W', 'W', ' '},
+    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'}
+    };
+        
+    // Copy initial map layout to the game matrix
+    for (int i = 0; i < MATRIX_HEIGHT; i++) {
+        for (int j = 0; j < MATRIX_WIDTH; j++) {
+            matrix[i][j] = initialMatrix[i][j];
+        }
+    }
 }
 
 // Function to check if a character is passable
@@ -157,7 +205,7 @@ int isPassable(char character) {
     return character != 'W';
 }
 
-void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[11][11]) {
+void handlePlayerMovement(struct mobSettings *player, char direction, char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]) {
     // Define the player's new position
     int newPlayerX = player->playerX;
     int newPlayerY = player->playerY;
@@ -182,9 +230,36 @@ void handlePlayerMovement(struct mobSettings *player, char direction, char matri
     }
 
     // Check if the new position is within bounds and is passable
-    if (newPlayerX >= 0 && newPlayerX < 11 && newPlayerY >= 0 && newPlayerY < 11 && isPassable(matrix[newPlayerY][newPlayerX])) {
+    if (isPassable(matrix[newPlayerY][newPlayerX])) {
         // Update the player's position
         player->playerX = newPlayerX;
         player->playerY = newPlayerY;
     }
+}
+
+void showScreen(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]) {
+    // Display each cell of the game matrix
+    for (int i = 0; i < MATRIX_HEIGHT; i++) {
+        for (int j = 0; j < MATRIX_WIDTH; j++) {
+            printf("%2c ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void clearScreen() {
+    #ifdef _WIN32
+    system("cls"); // Windows
+    #else
+    system("clear"); // Linux
+    #endif
+}
+
+// Cross-platform sleep function
+void crossSleep(int milliseconds) {
+#ifdef _WIN32
+    Sleep(milliseconds); // Windows
+#else
+    usleep(milliseconds * 1000); // Linux
+#endif
 }

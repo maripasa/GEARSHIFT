@@ -1,25 +1,19 @@
-# *GEARSHIFT* - Text Dungeon Crawler
+# *Gearshift* - Text Dungeon Crawler
 
-![Game Screenshot](screenshot.png)
+_Read this in other languages: [English](README.md), [Português🇧🇷](README.br.md)._
 
 ## Overview
 
-*GEARSHIFT* is a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
-
-## Linux Compatibility
-
-**Please Note: *GEARSHIFT* is Designed Exclusively for Linux**
-
-*GEARSHIFT* is specifically designed and (not that) optimized for Linux operating systems. It may not be compatible with other platforms.
+*Gearshift* is a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
 
 ## System Requirements
 
-*GEARSHIFT* boasts minimalistic system requirements, making it suitable for a wide range of systems, including the legendary potato-powered computers.
+*Gearshift* boasts minimalistic system requirements, making it suitable for a wide range of systems, including the legendary potato-powered computers.
 
-- Operating System: Linux (No, it won't run on your microwave oven).
+- Operating System: Windows or Linux (No, it won't run on your microwave oven).
 - Processor: A potato, a toaster, or any CPU with basic arithmetic capabilities.
 - Memory: A handful of bytes (RAM not required, but you can sprinkle some if you have it).
-- Storage: Almost negligible, *GEARSHIFT* fits on a floppy disk (if you can find one).
+- Storage: Almost negligible, *Gearshift* fits on a floppy disk (if you can find one).
 
 ## Features
 
@@ -36,39 +30,79 @@
 
 *(Not even two minutes right now, but you can always replay it a billion million times.)*
 
-## Changelog
+### Changelog 13/09/2023
+Version 0.0.2 (Pre-Alpha - Release Date: TBD)
+- Project initiation and setup.
+- Basic project structure.
+- Some code fixes.
+- Some target creations.
+- Made it easier to expand.
+- Organized code.
+- Made README prettier and a pt-br page.
+- Added support for WINDOWS!!
 
-### Todo
+## Todo
+
+### **Long Goals**
+
+- **Map Representation:**
+  - [ ] Load the initial map from an external file instead of hardcoding it.
+
+- **Game Logic:**
+  - [ ] Define clear objectives or win/lose conditions.
+  - [ ] Implement collision detection for advanced gameplay.
+  
+- **Map Generation:**
+  - [ ] **(!!!MAYBE!!!)** Consider implementing a procedural map generation algorithm.
+  
+- [ ] **Code Organization:**
+  - [ ] Group related functions into modules or classes. **(DON'T KNOW HOW TO DO IT YET)**
+
+- **Error Handling:**
+  - [ ] Implement error handling for file I/O. **(DON'T KNOW HOW TO DO IT YET)**
+  
+- **Platform Independence:**
+  - [ ] Consider using a cross-platform library like ncurses for console input/output. **(DON'T KNOW HOW TO DO IT YET SOMEONE TOLD ME TO DO THIS)**
+
+- **Gameplay Mechanics:**
+  - [ ] Expand the game with additional gameplay mechanics, such as combat, puzzles, or quests.
+  
+- **Graphics and Animation:**
+  - [ ] **(!!!MAYBE!!!)** Improve the visual aspect of the game using graphics libraries like SDL or OpenGL.
+
+### Short Goals
+
+- [ ] Improve the `takeInput` function to handle input errors more robustly.
+- [ ] Implement a save and load game feature, who knows.
+
+- [ ] Add a menu, every game needs it.
+
+- [ ] Add a status thingy.
 
 - [ ] Add more characters and obstacles for increased amusement (new tiles and support for them).
 
 - [ ] Add inventory support so the game has something to show
 
-- [ ] Increase gameplay duration to at least two minutes (or not, replayability is key).
+- [ ] Increase gameplay duration to at least two minutes
 
-- [ ] Implement microwave oven support.
+- [x] ~~Implement microwave oven support.~~ (it works on windows now)
 
 - [ ] Add ability to portal through spaces
 
-### Version 0.0.1 (Pre-Alpha - Release Date: TBD)
-
-- Project initiation and setup.
-- Basic project structure.
-
 ## Getting Started
 
-To become a master with *GEARSHIFT*, follow these simple steps:
+To become a master with *Gearshift*, follow these simple steps:
 
 1. **Clone the Repository**: Forget about fancy releases; just grab the latest code straight from this repository. No need for fancy installations.
 
     ```shell
-    git clone https://github.com/maripasa/GEARSHIFT
+    git clone https://github.com/maripasa/Gearshift
     ```
 
-2. **Navigate to the *GEARSHIFT* Directory**:
+2. **Navigate to the *Gearshift* Directory**:
 
     ```shell
-    cd GEARSHIFT
+    cd Gearshift
     ```
 
 3. **Run the Game**:
