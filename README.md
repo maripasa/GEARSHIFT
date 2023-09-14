@@ -2,7 +2,7 @@
 
 ![game screenshot2](https://github.com/maripasa/GEARSHIFT/assets/123270648/125b6ee1-e77b-4563-94a7-506d8086aef6)
 
-_Read this in other languages: [English](README.md), [Português🇧🇷](README.br.md)._
+_Read this in other languages: [English](README.md), [Português](README.br.md)._
 
 ## Overview
 
