@@ -1,16 +1,16 @@
-# *Gearshift* - Text Dungeon Crawler
+# *GEARSHIFT* - Text Dungeon Crawler
 
 ![game screenshot2](https://github.com/maripasa/GEARSHIFT/assets/123270648/125b6ee1-e77b-4563-94a7-506d8086aef6)
 
-_Read this in other languages: [English](README.md), [Português🇧🇷](README.br.md)._
+_Read this in other languages: [English](README.md), [Português](README.br.md)._
 
 ## Overview
 
-*Gearshift* is ~~(yet to be)~~ a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
+*GEARSHIFT* is ~~(yet to be)~~ a mind-blowingly simple text-based "dungeon crawler" (you aren't in a dungeon) written in C. This project is currently in the "pre-alpha" stage, which means we're just getting started on this thrilling adventure through the ruins of a blue-sky-taken green world.
 
 ## System Requirements
 
-*Gearshift* boasts minimalistic system requirements, making it suitable for a wide range of systems, including the legendary potato-powered computers.
+*GEARSHIFT* boasts minimalistic system requirements, making it suitable for a wide range of systems, including the legendary potato-powered computers.
 
 - Operating System: Windows or Linux (No, it won't run on your microwave oven).
 - Processor: A potato, a toaster, or any CPU with basic arithmetic capabilities.
@@ -45,18 +45,18 @@ Version 0.0.2 (Pre-Alpha - Release Date: TBD)
 
 ## Getting Started
 
-To become a master with *Gearshift*, follow these simple steps:
+To become a master with *GEARSHIFT*, follow these simple steps:
 
 1. **Clone the Repository**: Forget about fancy releases; just grab the latest code straight from this repository. No need for fancy installations.
 
     ```shell
-    git clone https://github.com/maripasa/Gearshift
+    git clone https://github.com/maripasa/GEARSHIFT
     ```
 
-2. **Navigate to the *Gearshift* Directory**:
+2. **Navigate to the *GEARSHIFT* Directory**:
 
     ```shell
-    cd Gearshift
+    cd GEARSHIFT
     ```
 
 3. **Run the Game**:
@@ -96,8 +96,9 @@ To become a master with *Gearshift*, follow these simple steps:
 
 ### Short Goals
 
-- [ ] Add inventory support so the game has something to show
-  
+- [ ] Add the gcc command for compiling in the READMEs.
+
+- [ ] Improve the `takeInput` function to handle input errors more robustly.
 - [ ] Implement a save and load game feature, who knows.
 
 - [ ] Add a menu, every game needs it.
@@ -113,3 +114,5 @@ To become a master with *Gearshift*, follow these simple steps:
 - [x] Improve the `takeInput` function to handle input errors more robustly. (I think i solved it)
 
 - [x] ~~Implement microwave oven support.~~ (it works on windows now)
+
+- [ ] Add ability to portal through spaces
