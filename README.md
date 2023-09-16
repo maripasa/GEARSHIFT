@@ -96,7 +96,8 @@ To become a master with *Gearshift*, follow these simple steps:
 
 ### Short Goals
 
-- [ ] Improve the `takeInput` function to handle input errors more robustly.
+- [ ] Add inventory support so the game has something to show
+  
 - [ ] Implement a save and load game feature, who knows.
 
 - [ ] Add a menu, every game needs it.
@@ -105,10 +106,10 @@ To become a master with *Gearshift*, follow these simple steps:
 
 - [ ] Add more characters and obstacles for increased amusement (new tiles and support for them).
 
-- [ ] Add inventory support so the game has something to show
-
 - [ ] Increase gameplay duration to at least two minutes
 
-- [x] ~~Implement microwave oven support.~~ (it works on windows now)
-
 - [ ] Add ability to portal through spaces
+
+- [x] Improve the `takeInput` function to handle input errors more robustly. (I think i solved it)
+
+- [x] ~~Implement microwave oven support.~~ (it works on windows now)

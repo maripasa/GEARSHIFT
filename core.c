@@ -14,8 +14,10 @@
 #define MATRIX_WIDTH 12
 #define INPUT_SIZE 10
 
-// Forward declaration of the struct mobSettings
+// Struct mobSettings
 struct mobSettings;
+struct Item;
+struct Inventory;
 
 // Introduction Functions
 void bootIntroduction();
@@ -36,7 +38,24 @@ void showScreen(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]);
 void clearScreen();
 void crossSleep(int milliseconds);
 
-// Global Struct
+// Player inventory
+void initializeInventory(struct Inventory* inventory, int capacity);
+void freeInventory(struct Inventory* inventory);
+void displayInventory(const struct Inventory* inventory);
+void addItem(struct Inventory* inventory, const char* name, int quantity);
+
+struct Inventory {
+    struct Item* items;
+    int capacity;
+    int size;
+};
+struct Item {
+    char name[50];
+    int quantity;
+};
+
+
+// Global Mob Struct
 struct mobSettings {
     int playerY;
     int playerX;
@@ -44,11 +63,16 @@ struct mobSettings {
     int playerRoom;
 };
 
+
 int main() {
 
     // Configura o código de página do console para UTF-8
     system("chcp 65001");
     clearScreen();
+
+    // Create and initialize the player's inventory
+    struct Inventory playerInventory;
+    initializeInventory(&playerInventory, 10);
 
     // Initialize player settings
     struct mobSettings player;
@@ -56,10 +80,21 @@ int main() {
     player.playerY = CENTER_Y;
     player.playerSkin = 'O';
 
+    /* Add items to the inventory
+    addItem(&playerInventory, "Health Potion", 5);
+    addItem(&playerInventory, "Sword", 1);
+    addItem(&playerInventory, "Gold Coin", 100);
+    
+    // Display the inventory
+    displayInventory(&playerInventory);
+    */
+
     // Display boot introduction and wait for input
     bootIntroduction();
 
     takeCommand(&player);
+
+    freeInventory(&playerInventory);
 
     return 0;
 }
@@ -102,7 +137,6 @@ void introduction() {
     printf("    ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝        ╚═╝ \n\n");
     crossSleep(3000);
 }
-
 
 char takeInput(const char *question, char *command, char *argument, int bufferSize) {
     printf(" │ %s\n", question);
@@ -198,7 +232,6 @@ void buildMap(char matrix[MATRIX_HEIGHT][MATRIX_WIDTH]) {
     }
 }
 
-// Function to check if a character is passable
 int isPassable(char character) {
     // Add conditions for different characters here
     // For now, only 'W' (wall) is considered impassable
@@ -255,11 +288,40 @@ void clearScreen() {
     #endif
 }
 
-// Cross-platform sleep function
 void crossSleep(int milliseconds) {
 #ifdef _WIN32
     Sleep(milliseconds); // Windows
 #else
     usleep(milliseconds * 1000); // Linux
 #endif
+}
+
+void initializeInventory(struct Inventory* inventory, int capacity) {
+    inventory->items = (struct Item*)malloc(sizeof(struct Item) * capacity);
+    inventory->capacity = capacity;
+    inventory->size = 0;
+}
+
+void addItem(struct Inventory* inventory, const char* name, int quantity) {
+    if (inventory->size < inventory->capacity) {
+        strcpy(inventory->items[inventory->size].name, name);
+        inventory->items[inventory->size].quantity = quantity;
+        inventory->size++;
+    } else {
+        printf("Inventory is full.\n");
+    }
+}
+
+void displayInventory(const struct Inventory* inventory) {
+    printf("Inventory Contents:\n");
+    for (int i = 0; i < inventory->size; i++) {
+        printf("%s x%d\n", inventory->items[i].name, inventory->items[i].quantity);
+    }
+}
+
+void freeInventory(struct Inventory* inventory) {
+    free(inventory->items);
+    inventory->items = NULL;
+    inventory->capacity = 0;
+    inventory->size = 0;
 }
